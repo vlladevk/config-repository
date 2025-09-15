@@ -1,1 +1,63 @@
+server:
+  port: 0
+  
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, circuitbreakerevents
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      accounting-service:
+        failure-rate-threshold: 50
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 10s
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        event-consumer-buffer-size: 100
+        register-health-indicator: true
+        permitted-number-of-calls-in-half-open-state: 4
+      resources-service:
+        failure-rate-threshold: 60
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 3s
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 4
+        minimum-number-of-calls: 1
+        event-consumer-buffer-size: 30
+        register-health-indicator: true
+        permitted-number-of-calls-in-half-open-state: 2
+    circuit-breaker-aspect-order: 1
+  retry:
+    retry-aspect-order: 2
+    instances:
+      accounting-service:
+        max-attempts: 2
+        wait-duration: 5000
+      resources-service:
+        max-attempts: 5
+        wait-duration: 1000
