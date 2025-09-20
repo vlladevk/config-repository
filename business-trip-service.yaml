@@ -53,6 +53,18 @@ resilience4j:
         permitted-number-of-calls-in-half-open-state: 2
         ignore-exceptions:
           - by.javaguru.jdmik7.businesstripservice.exception.ResourceServiceClientException
+      profiler-service:
+        failure-rate-threshold: 50
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 10s
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        event-consumer-buffer-size: 100
+        register-health-indicator: true
+        permitted-number-of-calls-in-half-open-state: 4
+        ignore-exceptions:              
+          - by.javaguru.jdmik7.businesstripservice.exception.ProfilerServiceClientException
     circuit-breaker-aspect-order: 1
   retry:
     retry-aspect-order: 2
@@ -67,3 +79,8 @@ resilience4j:
         wait-duration: 1000
         ignore-exceptions:
           - by.javaguru.jdmik7.businesstripservice.exception.ResourceServiceClientException
+      profiler-service:
+        max-attempts: 3
+        wait-duration: 5000
+        ignore-exceptions:              
+          - by.javaguru.jdmik7.businesstripservice.exception.ProfilerServiceClientException
