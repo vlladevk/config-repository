@@ -29,30 +29,6 @@ management:
 resilience4j:
   circuitbreaker:
     instances:
-      accounting-service:
-        failure-rate-threshold: 50
-        automatic-transition-from-open-to-half-open-enabled: true
-        wait-duration-in-open-state: 10s
-        sliding-window-type: COUNT_BASED
-        sliding-window-size: 10
-        minimum-number-of-calls: 5
-        event-consumer-buffer-size: 100
-        register-health-indicator: true
-        permitted-number-of-calls-in-half-open-state: 4
-        ignore-exceptions:              
-          - by.javaguru.jdmik7.businesstripservice.exception.AccountingServiceClientException
-      resources-service:
-        failure-rate-threshold: 60
-        automatic-transition-from-open-to-half-open-enabled: true
-        wait-duration-in-open-state: 3s
-        sliding-window-type: COUNT_BASED
-        sliding-window-size: 4
-        minimum-number-of-calls: 1
-        event-consumer-buffer-size: 30
-        register-health-indicator: true
-        permitted-number-of-calls-in-half-open-state: 2
-        ignore-exceptions:
-          - by.javaguru.jdmik7.businesstripservice.exception.ResourceServiceClientException
       profiler-service:
         failure-rate-threshold: 50
         automatic-transition-from-open-to-half-open-enabled: true
@@ -69,16 +45,6 @@ resilience4j:
   retry:
     retry-aspect-order: 2
     instances:
-      accounting-service:
-        max-attempts: 2
-        wait-duration: 5000
-        ignore-exceptions:              
-          - by.javaguru.jdmik7.businesstripservice.exception.AccountingServiceClientException
-      resources-service:
-        max-attempts: 5
-        wait-duration: 1000
-        ignore-exceptions:
-          - by.javaguru.jdmik7.businesstripservice.exception.ResourceServiceClientException
       profiler-service:
         max-attempts: 3
         wait-duration: 5000
