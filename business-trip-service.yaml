@@ -26,6 +26,36 @@ management:
     circuitbreakers:
       enabled: true
 
+kafka:
+  producer:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    acks: all
+    delivery-timeout-ms: 20000
+    linger-ms: 0
+    request-timeout-ms: 10000
+    enable-idempotence: true
+    max-in-flight-requests-per-connection: 5
+    retry-backoff-ms: 1000
+    retries: 10
+  consumer:
+    trusted-packages: "by.javaguru.jdmik7.core.*"
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    consumer-group-id: ${KAFKA_CONSUMER_GROUP}
+    auto-offset-reset: latest
+  topics:
+    accounting-allocate-requests: ${KAFKA_TOPIC_ACCOUNTING_ALLOCATE_REQUESTS}
+    resources-check-requests: ${KAFKA_TOPIC_RESOURCES_CHECK_REQUESTS}
+    notification-send-requests: ${KAFKA_TOPIC_NOTIFICATION_SEND_REQUESTS}
+    internal-business-trip-responses: ${KAFKA_TOPIC_INTERNAL_BUSINESS_TRIP_RESPONSES}
+  topic-config:
+    partitions: 3
+    replicas: 3
+    min-in-sync-replicas: 2
+
 resilience4j:
   circuitbreaker:
     instances:
