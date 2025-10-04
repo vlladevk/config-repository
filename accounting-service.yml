@@ -1,0 +1,36 @@
+kafka:
+  producer:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    acks: all
+    delivery-timeout-ms: 20000
+    linger-ms: 0
+    request-timeout-ms: 10000
+    enable-idempotence: true
+    max-in-flight-requests-per-connection: 5
+    retry-backoff-ms: 1000
+    retries: 10
+    topics:
+      promotion: ${KAFKA_INTERNAL_PROMOTIONS_RESPONSES}
+      onboarding: ${KAFKA_INTERNAL_ONBOARDING_RESPONSES}
+      relocation: ${KAFKA_INTERNAL_RELOCATION_RESPONSES}
+      recruitment: ${KAFKA_INTERNAL_RECRUITMENT_RESPONSES}
+      resignation: ${KAFKA_INTERNAL_RESIGNATION_RESPONSES}
+      education: ${KAFKA_INTERNAL_EDUCATION_RESPONSES}
+      businesstrip: ${KAFKA_INTERNAL_BUSINESS_RESPONSES}
+      vacation: ${KAFKA_INTERNAL_VACATION_RESPONSES}
+  consumer:
+    trusted-packages: "by.javaguru.jdmik7.core.*"
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    consumer-group-id: ${KAFKA_CONSUMER_GROUP}
+    auto-offset-reset: latest
+    topics:
+      accounting-allocate-requests: ${KAFKA_ACCOUNTING_ALLOCATE_REQUESTS}
+
+  topic-config:
+    partitions: 3
+    replicas: 3
+    min-in-sync-replicas: 2
