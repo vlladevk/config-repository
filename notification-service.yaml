@@ -1,10 +1,13 @@
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      group-id: ${KAFKA_CONSUMER_GROUP}
+      auto-offset-reset: latest
+      properties:
+        spring.json.trusted.packages: by.javaguru.jdmik7.core.*
+    
 kafka:
   consumer:
-    trusted-packages: "by.javaguru.jdmik7.core.*"
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
-    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-    consumer-group-id: ${KAFKA_CONSUMER_GROUP}
-    auto-offset-reset: latest
     topics:
       notification-send-requests: ${KAFKA_NOTIFICATION_SEND_REQUESTS}
