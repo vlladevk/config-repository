@@ -8,25 +8,6 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, info, circuitbreakerevents
-  endpoint:
-    health:
-      show-details: always
-  health:
-    circuitbreakers:
-      enabled: true
-
-spring:
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
 
@@ -47,6 +28,24 @@ spring:
       auto-offset-reset: latest
       properties:
         spring.json.trusted.packages: by.javaguru.jdmik7.core.*
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, circuitbreakerevents
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
 
 kafka:
   topics:
