@@ -26,6 +26,7 @@ spring:
     consumer:
       group-id: ${KAFKA_CONSUMER_GROUP}
       auto-offset-reset: latest
+      isolation-level: READ_COMMITTED
       properties:
         spring.json.trusted.packages: by.javaguru.jdmik7.core.*
 
