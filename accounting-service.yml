@@ -30,7 +30,7 @@ kafka:
       recruitment: ${KAFKA_INTERNAL_RECRUITMENT_RESPONSES}
       resignation: ${KAFKA_INTERNAL_RESIGNATION_RESPONSES}
       education: ${KAFKA_INTERNAL_EDUCATION_RESPONSES}
-      businesstrip: ${KAFKA_INTERNAL_BUSINESS_RESPONSES}
+      business-trip: ${KAFKA_INTERNAL_BUSINESS_RESPONSES}
       vacation: ${KAFKA_INTERNAL_VACATION_RESPONSES}
       
   consumer:
