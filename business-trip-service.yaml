@@ -55,6 +55,7 @@ kafka:
     notification-send-requests: ${KAFKA_TOPIC_NOTIFICATION_SEND_REQUESTS}
     internal-business-trip-responses: ${KAFKA_TOPIC_INTERNAL_BUSINESS_TRIP_RESPONSES}
     profiler-update-requests: ${KAFKA_TOPIC_PROFILER_UPDATE_REQUEST}
+    business-trip-saga: ${KAFKA_TOPIC_BUSINESS_TRIP_SAGA}
   topic-config:
     partitions: 3
     replicas: 3
