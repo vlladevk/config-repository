@@ -28,7 +28,7 @@ spring:
       auto-offset-reset: latest
       isolation-level: READ_COMMITTED
       properties:
-        spring.json.trusted.packages: "by.javaguru.jdmik7.core.*, by.javaguru.jdmik7.businesstripservice.event.*"
+        spring.json.trusted.packages: "by.javaguru.jdmik7.core.*, by.javaguru.jdmik7.businesstripservice.event"
 
 
 eureka:
